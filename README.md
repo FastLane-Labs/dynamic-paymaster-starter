@@ -14,7 +14,7 @@ git clone https://github.com/FastLane-Labs/dynamic-paymaster-starter.git
 npm i
 ```
 
-3. Initialize your environment variables by copying the `.env.example` file to an `.env.local` file. Then, in `.env.local`, [paste your Privy App ID from the dashboard](https://docs.privy.io/guide/dashboard/api-keys).
+3. Initialize your environment variables by copying the `.env.example` file to an `.env.local` file.
 
 ```sh
 # In your terminal, create .env.local from .env.example

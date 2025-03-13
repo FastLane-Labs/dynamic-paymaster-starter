@@ -1,5 +1,53 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Setup
+
+1. Clone this repository and open it in your terminal.
+
+```sh
+git clone https://github.com/FastLane-Labs/dynamic-paymaster-starter.git
+```
+
+2. Install the necessary dependencies (including [Privy Auth](https://www.npmjs.com/package/@privy-io/react-auth)) with `npm`.
+
+```sh
+npm i
+```
+
+3. Initialize your environment variables by copying the `.env.example` file to an `.env.local` file. Then, in `.env.local`, [paste your Privy App ID from the dashboard](https://docs.privy.io/guide/dashboard/api-keys).
+
+```sh
+# In your terminal, create .env.local from .env.example
+cp .env.example .env.local
+
+# Add your environement variables to .env.local
+NEXT_PUBLIC_RPC_URL=<RPC_URL>
+NEXT_PUBLIC_SHBUNDLER_URL=https://monad-testnet.4337-shbundler-fra.fastlane-labs.xyz
+NEXT_PUBLIC_ADDRESS_HUB=0xC9f0cDE8316AbC5Efc8C3f5A6b571e815C021B51
+NEXT_PUBLIC_SPONSOR_WALLET_PRIVATE_KEY=<SPONSOR_PRIVATE_KEY>
+NEXT_PUBLIC_PRIVATE_KEY=<EOA_PRIVATE_KEY>
+NEXT_PUBLIC_DYNAMIC_ENVIRONMENT_ID=<DYNAMIC_ENVIRONMENT_ID>
+NEXT_PUBLIC_PAYMASTER_URL=http://localhost:3000/api/paymaster
+```
+4. Either the sponsor or user MUST stake and bond MON to the paymaster. You can do this on shmonad.xyz.
+
+## Example
+When using sendUserOperation, you MUST set the paymasterConfig:
+1. Sponsor pays for gas
+```typescript
+paymasterContext: {
+  mode: "sponsor",
+  address: sponsorAccount?.address
+}
+```
+2. User pays for gas
+```typescript
+paymasterContext: {
+  mode: "user",
+  address: smartWalletClient.account.address
+}
+```
+
 ## Getting Started
 
 First, run the development server:

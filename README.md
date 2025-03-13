@@ -8,7 +8,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 git clone https://github.com/FastLane-Labs/dynamic-paymaster-starter.git
 ```
 
-2. Install the necessary dependencies (including [Privy Auth](https://www.npmjs.com/package/@privy-io/react-auth)) with `npm`.
+2. Install the necessary dependencies with `npm`.
 
 ```sh
 npm i

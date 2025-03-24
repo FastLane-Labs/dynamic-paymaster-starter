@@ -4,7 +4,7 @@ import { useDynamicContext, useIsLoggedIn } from "@dynamic-labs/sdk-react-core";
 import { isEthereumWallet } from '@dynamic-labs/ethereum'
 import { userClient, smartAccountClient, sponsorAccount } from '@/lib/fastlane/user';
 import { shBundler } from '@/lib/fastlane/user';
-
+import { rfqSwap } from '@/lib/fastlane/rfq/demo-smart-wallet';
 import './Methods.css';
 
 export default function DynamicMethods({ isDarkMode }) {
@@ -64,6 +64,10 @@ export default function DynamicMethods({ isDarkMode }) {
     console.log("User Operation Receipt:", userOpReceipt);
   }
 
+  async function setupRFQDemo() {
+    await rfqSwap();
+  }
+
 
 
    return (
@@ -77,6 +81,7 @@ export default function DynamicMethods({ isDarkMode }) {
       <>
         <button className="btn btn-primary" onClick={fetchWalletClient}>Fetch Wallet Client</button>
         <button className="btn btn-primary" onClick={sendSponsoredTransaction}>Send Sponsored Transaction</button>    
+        <button className="btn btn-primary" onClick={setupRFQDemo}>Setup RFQ Demo</button>
       </>
     }
 

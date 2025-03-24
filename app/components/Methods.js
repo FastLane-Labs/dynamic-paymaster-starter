@@ -58,8 +58,6 @@ export default function DynamicMethods({ isDarkMode }) {
     });
 
     const packedUserOp = toPackedUserOperation(userOp);
-    console.log("packedUserOp", packedUserOp);
-    console.log("gasFees", packedUserOp.gasFees);
     
     // BACKEND SERVICE: START
     const currentTime = BigInt(Math.floor(Date.now() / 1000));

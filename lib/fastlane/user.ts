@@ -5,13 +5,14 @@ import {
   PAYMASTER_URL,
   PRIVATE_KEY,
   SHBUNDLER_URL,
-  SPONSOR_WALLET_PRIVATE_KEY,
+  SPONSOR_WALLET_PRIVATE_KEY, 
 } from "./constants";
 import { toSafeSmartAccount } from "permissionless/accounts";
 import { createBundlerClient, entryPoint07Address } from "viem/account-abstraction";
 import { createPaymasterClient } from "viem/account-abstraction";
 import { privateKeyToAccount } from "viem/accounts";
 import { createSmartAccountClient } from "permissionless/clients";
+
 
 // EOA
 const EOA = privateKeyToAccount(PRIVATE_KEY);
@@ -35,11 +36,11 @@ const paymasterClient = createPaymasterClient({
 });
 
 // sponsor account
-const sponsorAccount = privateKeyToAccount(SPONSOR_WALLET_PRIVATE_KEY as Hex)
+const sponsorEOA = privateKeyToAccount(SPONSOR_WALLET_PRIVATE_KEY as Hex)
 
 // sponsor wallet
-const sponsorWallet = createWalletClient({
-  account: sponsorAccount,
+const sponsorClient = createWalletClient({
+  account: sponsorEOA,
   chain: CHAIN,
   transport: http(RPC_URL)
 })
@@ -62,10 +63,10 @@ const shBundler = createBundlerClient({
   client: publicClient,
   chain: CHAIN,
   paymaster: paymasterClient,
-  paymasterContext: {
-    mode: "sponsor",
-    address: sponsorAccount.address,
-  },
+  // paymasterContext: {
+  //   mode: "sponsor",
+  //   address: sponsorEOA.address,
+  // },
 })
 
 const smartAccountClient = createSmartAccountClient({
@@ -73,11 +74,6 @@ const smartAccountClient = createSmartAccountClient({
   client: publicClient,
   chain: CHAIN,
   bundlerTransport: http(SHBUNDLER_URL),
-  paymaster: paymasterClient,
-  paymasterContext: {
-    mode: "sponsor",
-    address: sponsorAccount.address,
-  },
 });
 
 
@@ -86,8 +82,8 @@ export {
   publicClient, 
   smartAccount, 
   paymasterClient, 
-  sponsorWallet, 
+  sponsorClient, 
   shBundler,
-  sponsorAccount,
-  smartAccountClient
+  sponsorEOA,
+  smartAccountClient,
 };

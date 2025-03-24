@@ -10,6 +10,7 @@ __turbopack_context__.s({
     "CHAIN": (()=>CHAIN),
     "CHAIN_ID": (()=>CHAIN_ID),
     "MIN_BONDED_BALANCE": (()=>MIN_BONDED_BALANCE),
+    "PAYMASTER_ADDRESS": (()=>PAYMASTER_ADDRESS),
     "PAYMASTER_URL": (()=>PAYMASTER_URL),
     "PRIVATE_KEY": (()=>PRIVATE_KEY),
     "RPC_URL": (()=>RPC_URL),
@@ -17,11 +18,12 @@ __turbopack_context__.s({
     "SPONSOR_WALLET_PRIVATE_KEY": (()=>SPONSOR_WALLET_PRIVATE_KEY)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/build/polyfills/process.js [app-client] (ecmascript)");
-const RPC_URL = ("TURBOPACK compile-time value", "https://testnet-rpc.monad.xyz");
+const RPC_URL = ("TURBOPACK compile-time value", "https://rpc.monad-testnet.fastlane.xyz");
 const SHBUNDLER_URL = ("TURBOPACK compile-time value", "https://monad-testnet.4337-shbundler-fra.fastlane-labs.xyz");
-const PAYMASTER_URL = ("TURBOPACK compile-time value", "http://localhost:3000/api/paymaster");
+const PAYMASTER_URL = ("TURBOPACK compile-time value", "https://monad-testnet.4337-shbundler-fra.fastlane-labs.xyz");
 const PRIVATE_KEY = ("TURBOPACK compile-time value", "0x0abba15249271743713eeebc09e1881e577db29ff959f7b441af37add7b57c41");
 const ADDRESS_HUB = ("TURBOPACK compile-time value", "0xC9f0cDE8316AbC5Efc8C3f5A6b571e815C021B51");
+const PAYMASTER_ADDRESS = ("TURBOPACK compile-time value", "0x686bff22da7EeCff8d9606e81b1A8ce15Dd925b7");
 const SPONSOR_WALLET_PRIVATE_KEY = ("TURBOPACK compile-time value", "0x0abba15249271743713eeebc09e1881e577db29ff959f7b441af37add7b57c41");
 const CHAIN_ID = 10143;
 const MIN_BONDED_BALANCE = BigInt(100000000000000000);

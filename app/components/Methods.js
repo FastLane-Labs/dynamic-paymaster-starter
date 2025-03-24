@@ -2,11 +2,11 @@
 import { useState, useEffect } from 'react';
 import { useDynamicContext, useIsLoggedIn } from "@dynamic-labs/sdk-react-core";
 import { isEthereumWallet } from '@dynamic-labs/ethereum'
-import { userClient, smartAccountClient, sponsorAccount } from '@/lib/fastlane/user';
-import { shBundler } from '@/lib/fastlane/user';
-
+import { userClient, smartAccountClient, shBundler, sponsorClient } from '@/lib/fastlane/user';
+import { toPackedUserOperation } from 'viem/account-abstraction';
 import './Methods.css';
-
+import { getSignature } from '@/lib/api/getSignature';
+import { CHAIN_ID, PAYMASTER_ADDRESS } from '@/lib/fastlane/constants';
 export default function DynamicMethods({ isDarkMode }) {
   const isLoggedIn = useIsLoggedIn();
   const { sdkHasLoaded, primaryWallet } = useDynamicContext();
@@ -46,25 +46,53 @@ export default function DynamicMethods({ isDarkMode }) {
 
   async function sendSponsoredTransaction() {
     if(!smartAccountClient) return;
-    const userOpHash = await smartAccountClient.sendUserOperation({
+    const calls = [
+      {
+        to: userClient.account.address,
+        value: 1000000000000000n,
+      },
+    ];
+    const userOp = await smartAccountClient.prepareUserOperation({
       account: smartAccountClient.account,
-      calls: [
-        {
-          to: userClient.account.address,
-          value: 1000000000000000n,
-        },
-      ],
+      calls,
     });
+
+    const packedUserOp = toPackedUserOperation(userOp);
+    console.log("packedUserOp", packedUserOp);
+    console.log("gasFees", packedUserOp.gasFees);
     
-    console.log("User Operation Hash:", userOpHash);
+    // BACKEND SERVICE: START
+    const currentTime = BigInt(Math.floor(Date.now() / 1000));
+    const validUntil = currentTime + 3600n;
+    const validAfter = 0n;
+
+    const sponsorSignature = await getSignature(packedUserOp, validUntil, validAfter, PAYMASTER_ADDRESS, CHAIN_ID);
+    // BACKEND SERVICE: END
+    
+    const userOpHash = await shBundler.sendUserOperation({
+      account: smartAccountClient.account,
+      calls,
+      // MUST HAVE SAME NONCE AS PREPARED USER OPERATION
+      nonce: userOp.nonce,
+      callGasLimit: userOp.callGasLimit,
+      verificationGasLimit: userOp.verificationGasLimit,
+      preVerificationGas: userOp.preVerificationGas,
+      maxFeePerGas: userOp.maxFeePerGas,
+      maxPriorityFeePerGas: userOp.maxPriorityFeePerGas,
+      paymasterContext: {
+        mode: "sponsor",
+        sponsor: sponsorClient.account.address,
+        sponsorSignature,
+        validUntil: validUntil.toString(),
+        validAfter: validAfter.toString()
+      }
+    });
     
     const userOpReceipt = await shBundler.waitForUserOperationReceipt({
       hash: userOpHash,
     });
     console.log("User Operation Receipt:", userOpReceipt);
   }
-
-
 
    return (
     <>

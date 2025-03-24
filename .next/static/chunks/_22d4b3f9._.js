@@ -33,8 +33,8 @@ __turbopack_context__.s({
     "shBundler": (()=>shBundler),
     "smartAccount": (()=>smartAccount),
     "smartAccountClient": (()=>smartAccountClient),
-    "sponsorAccount": (()=>sponsorAccount),
-    "sponsorWallet": (()=>sponsorWallet),
+    "sponsorClient": (()=>sponsorClient),
+    "sponsorEOA": (()=>sponsorEOA),
     "userClient": (()=>userClient)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$viem$2f$_esm$2f$clients$2f$createPublicClient$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/viem/_esm/clients/createPublicClient.js [app-client] (ecmascript)");
@@ -73,10 +73,10 @@ const paymasterClient = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node
     transport: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$viem$2f$_esm$2f$clients$2f$transports$2f$http$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["http"])(__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$fastlane$2f$constants$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["PAYMASTER_URL"])
 });
 // sponsor account
-const sponsorAccount = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$viem$2f$_esm$2f$accounts$2f$privateKeyToAccount$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["privateKeyToAccount"])(__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$fastlane$2f$constants$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SPONSOR_WALLET_PRIVATE_KEY"]);
+const sponsorEOA = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$viem$2f$_esm$2f$accounts$2f$privateKeyToAccount$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["privateKeyToAccount"])(__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$fastlane$2f$constants$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SPONSOR_WALLET_PRIVATE_KEY"]);
 // sponsor wallet
-const sponsorWallet = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$viem$2f$_esm$2f$clients$2f$createWalletClient$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createWalletClient"])({
-    account: sponsorAccount,
+const sponsorClient = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$viem$2f$_esm$2f$clients$2f$createWalletClient$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createWalletClient"])({
+    account: sponsorEOA,
     chain: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$fastlane$2f$constants$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CHAIN"],
     transport: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$viem$2f$_esm$2f$clients$2f$transports$2f$http$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["http"])(__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$fastlane$2f$constants$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["RPC_URL"])
 });
@@ -98,22 +98,13 @@ const shBundler = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modul
     account: smartAccount,
     client: publicClient,
     chain: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$fastlane$2f$constants$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CHAIN"],
-    paymaster: paymasterClient,
-    paymasterContext: {
-        mode: "sponsor",
-        address: sponsorAccount.address
-    }
+    paymaster: paymasterClient
 });
 const smartAccountClient = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$permissionless$2f$_esm$2f$clients$2f$createSmartAccountClient$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createSmartAccountClient"])({
     account: smartAccount,
     client: publicClient,
     chain: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$fastlane$2f$constants$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CHAIN"],
-    bundlerTransport: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$viem$2f$_esm$2f$clients$2f$transports$2f$http$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["http"])(__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$fastlane$2f$constants$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SHBUNDLER_URL"]),
-    paymaster: paymasterClient,
-    paymasterContext: {
-        mode: "sponsor",
-        address: sponsorAccount.address
-    }
+    bundlerTransport: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$viem$2f$_esm$2f$clients$2f$transports$2f$http$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["http"])(__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$fastlane$2f$constants$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SHBUNDLER_URL"])
 });
 ;
 var _c;
@@ -139,6 +130,8 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$dynamic$2d
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$dynamic$2d$labs$2f$ethereum$2f$src$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$module__evaluation$3e$__ = __turbopack_context__.i("[project]/node_modules/@dynamic-labs/ethereum/src/index.js [app-client] (ecmascript) <module evaluation>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$dynamic$2d$labs$2f$ethereum$2d$core$2f$src$2f$wallet$2f$isEthereumWallet$2f$isEthereumWallet$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@dynamic-labs/ethereum-core/src/wallet/isEthereumWallet/isEthereumWallet.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$fastlane$2f$user$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/lib/fastlane/user.ts [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$fastlane$2f$constants$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/lib/fastlane/constants.ts [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$viem$2f$_esm$2f$account$2d$abstraction$2f$utils$2f$userOperation$2f$toPackedUserOperation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/viem/_esm/account-abstraction/utils/userOperation/toPackedUserOperation.js [app-client] (ecmascript)");
 var __turbopack_async_dependencies__ = __turbopack_handle_async_dependencies__([
     __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$fastlane$2f$user$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__
 ]);
@@ -146,6 +139,7 @@ var __turbopack_async_dependencies__ = __turbopack_handle_async_dependencies__([
 ;
 var _s = __turbopack_context__.k.signature();
 'use client';
+;
 ;
 ;
 ;
@@ -192,20 +186,72 @@ function DynamicMethods({ isDarkMode }) {
     }
     async function sendSponsoredTransaction() {
         if (!__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$fastlane$2f$user$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["smartAccountClient"]) return;
-        const userOpHash = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$fastlane$2f$user$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["smartAccountClient"].sendUserOperation({
+        const calls = [
+            {
+                to: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$fastlane$2f$user$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["userClient"].account.address,
+                value: 1000000000000000n
+            }
+        ];
+        const userOp = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$fastlane$2f$user$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["smartAccountClient"].prepareUserOperation({
             account: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$fastlane$2f$user$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["smartAccountClient"].account,
-            calls: [
-                {
-                    to: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$fastlane$2f$user$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["userClient"].account.address,
-                    value: 1000000000000000n
-                }
-            ]
+            calls
         });
-        console.log("User Operation Hash:", userOpHash);
-        const userOpReceipt = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$fastlane$2f$user$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["shBundler"].waitForUserOperationReceipt({
-            hash: userOpHash
-        });
-        console.log("User Operation Receipt:", userOpReceipt);
+        const packedUserOp = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$viem$2f$_esm$2f$account$2d$abstraction$2f$utils$2f$userOperation$2f$toPackedUserOperation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toPackedUserOperation"])(userOp);
+        // BACKEND SERVICE: START
+        const currentTime = Math.floor(Date.now() / 1000);
+        const validUntil = currentTime + 3600;
+        const validAfter = 0;
+        const payload = {
+            jsonrpc: "2.0",
+            id: 1,
+            method: "backend_getSignature",
+            params: {
+                packedUserOp,
+                validUntil,
+                validAfter,
+                PAYMASTER_ADDRESS: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$fastlane$2f$constants$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["PAYMASTER_ADDRESS"],
+                CHAIN_ID: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$fastlane$2f$constants$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CHAIN_ID"]
+            }
+        };
+        try {
+            const response = await fetch('/api/paymaster', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload, (key, value)=>typeof value === 'bigint' ? value.toString() : value)
+            });
+            const data = await response.json();
+            if (data.error) {
+                console.error("Error from backend:", data.error);
+                return;
+            }
+            console.log("Sponsor Signature received:", data.result);
+        } catch (error) {
+            console.error("Fetch error:", error);
+        }
+    // const userOpHash = await shBundler.sendUserOperation({
+    //   account: smartAccount,
+    //   calls,
+    //   // MUST HAVE SAME NONCE AS PREPARED USER OPERATION
+    //   nonce: userOp.nonce,
+    //   callGasLimit: userOp.callGasLimit,
+    //   verificationGasLimit: userOp.verificationGasLimit,
+    //   preVerificationGas: userOp.preVerificationGas,
+    //   maxFeePerGas: userOp.maxFeePerGas,
+    //   maxPriorityFeePerGas: userOp.maxPriorityFeePerGas,
+    //   // paymasterContext: {
+    //   //   mode: "sponsor",
+    //   //   sponsor: userClient.account.address,
+    //   //   sponsorSignature: sponsorSignature,
+    //   //   validUntil,
+    //   //   validAfter
+    //   // }
+    // });
+    // const userOpReceipt = await shBundler.waitForUserOperationReceipt({
+    //   hash: userOpHash,
+    // });
+    // console.log("User Operation Receipt:", userOpReceipt);
     }
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
         children: !isLoading && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -222,7 +268,7 @@ function DynamicMethods({ isDarkMode }) {
                                 children: "Fetch Wallet Client"
                             }, void 0, false, {
                                 fileName: "[project]/app/components/Methods.js",
-                                lineNumber: 78,
+                                lineNumber: 129,
                                 columnNumber: 9
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -231,14 +277,14 @@ function DynamicMethods({ isDarkMode }) {
                                 children: "Send Sponsored Transaction"
                             }, void 0, false, {
                                 fileName: "[project]/app/components/Methods.js",
-                                lineNumber: 79,
+                                lineNumber: 130,
                                 columnNumber: 9
                             }, this)
                         ]
                     }, void 0, true)
                 }, void 0, false, {
                     fileName: "[project]/app/components/Methods.js",
-                    lineNumber: 73,
+                    lineNumber: 124,
                     columnNumber: 11
                 }, this),
                 result && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -248,12 +294,12 @@ function DynamicMethods({ isDarkMode }) {
                         children: result
                     }, void 0, false, {
                         fileName: "[project]/app/components/Methods.js",
-                        lineNumber: 86,
+                        lineNumber: 137,
                         columnNumber: 15
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/app/components/Methods.js",
-                    lineNumber: 85,
+                    lineNumber: 136,
                     columnNumber: 13
                 }, this),
                 result && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -264,18 +310,18 @@ function DynamicMethods({ isDarkMode }) {
                         children: "Clear"
                     }, void 0, false, {
                         fileName: "[project]/app/components/Methods.js",
-                        lineNumber: 91,
+                        lineNumber: 142,
                         columnNumber: 15
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/app/components/Methods.js",
-                    lineNumber: 90,
+                    lineNumber: 141,
                     columnNumber: 13
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/app/components/Methods.js",
-            lineNumber: 72,
+            lineNumber: 123,
             columnNumber: 9
         }, this)
     }, void 0, false);
